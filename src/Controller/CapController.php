@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Controller;
+
+use App\Entity\Cap;
+use App\Form\CapType;
+use App\Repository\CapRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+
+#[Route('/cap')]
+class CapController extends AbstractController
+{
+    #[Route('/', name: 'app_cap_index', methods: ['GET'])]
+    public function index(CapRepository $capRepository): Response
+    {
+        return $this->render('cap/index.html.twig', [
+            'caps' => $capRepository->findAll(),
+        ]);
+    }
+
+    #[Route('/new', name: 'app_cap_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $cap = new Cap();
+        $form = $this->createForm(CapType::class, $cap);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($cap);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_cap_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('cap/new.html.twig', [
+            'cap' => $cap,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_cap_show', methods: ['GET'])]
+    public function show(Cap $cap): Response
+    {
+        return $this->render('cap/show.html.twig', [
+            'cap' => $cap,
+        ]);
+    }
+
+    #[Route('/{id}/edit', name: 'app_cap_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Cap $cap, EntityManagerInterface $entityManager): Response
+    {
+        $form = $this->createForm(CapType::class, $cap);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_cap_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('cap/edit.html.twig', [
+            'cap' => $cap,
+            'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}', name: 'app_cap_delete', methods: ['POST'])]
+    public function delete(Request $request, Cap $cap, EntityManagerInterface $entityManager): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$cap->getId(), $request->request->get('_token'))) {
+            $entityManager->remove($cap);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_cap_index', [], Response::HTTP_SEE_OTHER);
+    }
+}

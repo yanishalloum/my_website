@@ -1,0 +1,74 @@
+{% extends "base.html.twig" %}
+
+{% block head %}
+    <title>Cap</title>
+{% endblock %}
+
+{% block main %}
+    <div class="form-horizontal">
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Id</label>
+            <div class="col-sm-10">
+                    <div class="form-control form-control-plaintext">
+                            {{ cap.id }}
+                    </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label-lg">Brand</label>
+            <div class="col-sm-10">
+                    <div class="form-control form-control-plaintext form-control-lg">
+                            {{ cap.brand }}
+                    </div>
+            </div>
+        </div>
+
+    </div> <!-- form-horizontal -->
+
+    <h1>Cap</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cap.id }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ cap.description }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ cap.name }}</td>
+            </tr>
+            <tr>
+                <th>Color</th>
+                <td>{{ cap.color }}</td>
+            </tr>
+            <tr>
+                <th>Size</th>
+                <td>{{ cap.size }}</td>
+            </tr>
+            <tr>
+                <th>Condition</th>
+                <td>{{ cap.condition }}</td>
+            </tr>
+            <tr>
+                <th>Brand</th>
+                <td>{{ cap.brand }}</td>
+            </tr>
+            <tr>
+                <th>Year</th>
+                <td>{{ cap.year }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_cap_index') }}">back to list</a>
+
+    <a href="{{ path('app_cap_edit', {'id': cap.id}) }}">edit</a>
+
+    {{ include('cap/_delete_form.html.twig') }}
+{% endblock %}

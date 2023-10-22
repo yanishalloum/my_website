@@ -1,0 +1,7 @@
+bootstrap_menu:
+  menus:
+    main:
+      items:
+        todos:
+          label: 'Member'
+          route: 'app_member_index'        

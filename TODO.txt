@@ -1,0 +1,11 @@
+### MyCaps Project
+
+TODO:
+ - Issue when accessing the "Edit Cap" section: 
+ "Symfony 5 Error: Object of class Proxies\__CG__\App\Entity\Inventory could not be converted to string"
+ Issue resolved by adding __toString method to Inventory.php 
+ - Issue regarding fixtures: override reference
+ - Implement navigation between Inventory and Caps sections.
+ - Implement twig template.
+ - Improve website aestheticism.
+ - Centralise access to different sections using html instead of having to access by hand the address (eg: 127.0.0.1:8000/cap)
