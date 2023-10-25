@@ -33,6 +33,10 @@ class PasteController extends AbstractController
             $entityManager->persist($paste);
             $entityManager->flush();
 
+            // Make sure message will be displayed after redirect
+            $this->addFlash('message', 'bien ajouté');
+            // $this->addFlash() is equivalent to $request->getSession()->getFlashBag()->add()
+
             return $this->redirectToRoute('app_paste_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -78,4 +82,30 @@ class PasteController extends AbstractController
 
         return $this->redirectToRoute('app_paste_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/mark/{id}', name: 'paste_mark', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function markAction(Request $request, Paste $paste): Response
+    {
+        $id = $paste->getId();
+        // Récupération du tableau d'id urgents dans la session
+        $urgents = $request->getSession()->get('urgents');
+        dump($urgents);
+        if( ! is_array($id, $urgents) ) {
+                $urgents[] = $id;
+        }
+        else {
+            // substract two arrays
+            $urgents = array_diff($urgents, array($id));
+        }
+        
+
+        dump($urgents);
+        // Sauvegarde du tableau d'id urgents dans la session
+        $request->getSession()->set('urgents', $urgents);
+
+        dump($paste);
+        return $this->redirectToRoute('paste_show', 
+            ['id' => $paste->getId()]);
+    }
+
 }

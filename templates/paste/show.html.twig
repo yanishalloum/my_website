@@ -4,7 +4,15 @@
 
 {% block body %}
     <h1>Paste</h1>
-
+    {% set urgents = app.session.get('urgents') %}
+    {% dump(urgents) %}
+    <a href="{{ path('paste_mark' , {'id': paste.id}) }}">
+    {% if paste.id in urgents %}
+    URGENT
+    {% else %}
+    NOT URGENT
+    {% endif %}
+</a>
     <table class="table">
         <tbody>
             <tr>
