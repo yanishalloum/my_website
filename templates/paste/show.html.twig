@@ -31,6 +31,10 @@
                 <th>Content_type</th>
                 <td>{{ paste.contentType }}</td>
             </tr>
+            <tr>
+                <th>Image</th>
+                <td><img src="{{ vich_uploader_asset(paste, 'imageFile') }}"/></td>
+            </tr>
         </tbody>
     </table>
 

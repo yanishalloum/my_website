@@ -70,5 +70,7 @@
 
     <a href="{{ path('app_cap_edit', {'id': cap.id}) }}">edit</a>
 
+    <a href="{{ path('app_member_show', {'id': cap.user.id}) }}">Show member profile</a>
+
     {{ include('cap/_delete_form.html.twig') }}
 {% endblock %}

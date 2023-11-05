@@ -5,7 +5,11 @@
 {% block main %}
     <h1>Create new Paste</h1>
 
-    {{ include('paste/_form.html.twig') }}
+    {{ form_start(form) }}
+    {{ form_row(form.content) }}
+    {{ form_row(form.imageFile) }}
+    <button type="submit" class="btn btn-primary">Create Paste</button>
+    {{ form_end(form) }}
 
-    <a href="{{ path('app_paste_index') }}">back to list</a>
+    <a href="{{ path('app_paste_index') }}">Back to list</a>
 {% endblock %}

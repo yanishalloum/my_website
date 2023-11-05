@@ -33,6 +33,13 @@ class PasteController extends AbstractController
             $entityManager->persist($paste);
             $entityManager->flush();
 
+            // Change content-type according to image's
+            $imagefile = $paste->getImageFile();
+            if($imagefile) {
+                    $mimetype = $imagefile->getMimeType();
+                    $paste->setContentType($mimetype);
+            }
+                    
             // Make sure message will be displayed after redirect
             $this->addFlash('message', 'bien ajouté');
             // $this->addFlash() is equivalent to $request->getSession()->getFlashBag()->add()

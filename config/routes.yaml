@@ -3,3 +3,23 @@ controllers:
         path: ../src/Controller/
         namespace: App\Controller
     type: attribute
+
+# Routes pour les pages de consultation des "Caps"
+app_cap_show:
+  path: '/cap/{id}'
+  controller: App\Controller\CapController::show
+
+# Routes pour les pages de consultation des "Inventories"
+app_inventory_show:
+  path: '/inventory/{id}'
+  controller: App\Controller\InventoryController::show
+
+# Routes pour les pages de consultation des "Members"
+app_member_show:
+  path: '/member/{id}'
+  controller: App\Controller\MemberController::show
+
+# Routes pour les pages de consultation des "Pastes"
+app_paste_show:
+  path: '/paste/{id}'
+  controller: App\Controller\PasteController::show
