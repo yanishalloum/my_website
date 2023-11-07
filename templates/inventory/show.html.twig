@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+{% extends "base.html.twig" %}
 
-<title>Inventory</title>
+{% block head %}
+    <title>Inventory</title>
+{% endblock %}
 
 {% block body %}
     <h1>Inventory</h1>
@@ -19,6 +21,17 @@
                 <th>Name</th>
                 <td>{{ inventory.name }}</td>
             </tr>
+            <th>Caps</th>
+            <td>
+                <ul>
+                    {% for cap in inventory.caps %}
+                        <a href="{{ path('app_cap_show', {'id' : cap.id}) }}">{{ cap.name }}</a>
+                    {% else %}
+                        <em>Empty inventory</em>
+                    {% endfor %}
+                </ul>
+                      <a href="{{ path('app_cap_newininventory', {'id' : inventory.id}) }}">Add a new cap to {{ inventory }}</a>    
+            </td>        
         </tbody>
     </table>
 

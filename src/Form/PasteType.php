@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class PasteType extends AbstractType
 {
@@ -19,6 +20,7 @@ class PasteType extends AbstractType
             ->add('content_type')
             ->add('imageName', TextType::class,  ['disabled' => true])
             ->add('imageFile', VichImageType::class, ['required' => false])
+            ->add('created', DateType::class, ['widget' => 'single_text'])
         ;
     }
 
@@ -26,6 +28,8 @@ class PasteType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Paste::class,
+            'task_is_new' => false
         ]);
+        $resolver->setAllowedTypes('task_is_new', 'bool');
     }
 }

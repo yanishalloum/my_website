@@ -1,10 +1,12 @@
-<!DOCTYPE html>
+{% extends "base.html.twig" %}
 
-<title>New Inventory</title>
+{% block head %}
+    <title>New Inventory</title>
+{% endblock %}
 
 {% block body %}
     <h1>Create new Inventory</h1>
-
+    
     {{ include('inventory/_form.html.twig') }}
 
     <a href="{{ path('app_inventory_index') }}">back to list</a>

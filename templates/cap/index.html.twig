@@ -8,7 +8,6 @@
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ path('app_inventory_index') }}">Inventories</a></li>
@@ -41,6 +40,7 @@
                     <th>Brand</th>
                     <th>Year</th>
                     <th>actions</th>
+                    <th>member</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,9 +54,12 @@
                     <td>{{ cap.condition }}</td>
                     <td>{{ cap.brand }}</td>
                     <td>{{ cap.year }}</td>
+                    <td>{{ cap.inventory.member.name }}</td>
                     <td>
                         <a href="{{ path('app_cap_show', {'id': cap.id}) }}">show</a>
-                        <a href="{{ path('app_cap_edit', {'id': cap.id}) }}">edit</a>
+                        {% if is_granted('ROLE_USER') %}    
+                            <a href="{{ path('app_cap_edit', {'id': cap.id}) }}">edit</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% else %}

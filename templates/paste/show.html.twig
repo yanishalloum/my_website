@@ -38,9 +38,22 @@
         </tbody>
     </table>
 
+    
+    {% set urgents = app.session.get('urgents') %}
+    {% dump(urgents) %}
+    <a href="{{ path('paste_mark' , {'id': paste.id}) }}">
+    {% if paste.id in urgents %}
+    URGENT
+    {% else %}
+    NOT URGENT
+    {% endif %}
+    </a>
+
     <a href="{{ path('app_paste_index') }}">back to list</a>
 
-    <a href="{{ path('app_paste_edit', {'id': paste.id}) }}">edit</a>
+    {% if is_granted('ROLE_USER') %}
+        <a href="{{ path('app_paste_edit', {'id': paste.id}) }}">edit</a>
 
-    {{ include('paste/_delete_form.html.twig') }}
+        {{ include('paste/_delete_form.html.twig') }}
+    {% endif %}    
 {% endblock %}

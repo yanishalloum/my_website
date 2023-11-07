@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Cap;
+use App\Entity\Inventory;
 use App\Form\CapType;
 use App\Repository\CapRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -78,4 +79,25 @@ class CapController extends AbstractController
 
         return $this->redirectToRoute('app_cap_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/newininventory/{id}', name: 'app_cap_newininventory', methods: ['GET', 'POST'])]
+     public function newInInventory(Request $request, EntityManagerInterface $entityManager, Inventory $inventory): Response
+     {
+             $cap = new Cap();
+             $cap->setInventory($inventory);
+
+             $form = $this->createForm(CapType::class, $cap, ['display_inventory' => false ]);
+             $form->handleRequest($request);
+             if ($form->isSubmitted() && $form->isValid()) {
+                    $entityManager->persist($cap);
+                    $entityManager->flush();
+                    return $this->redirectToRoute('app_inventory_show', ['id' => $inventory->getId()], Response::HTTP_SEE_OTHER);
+             }
+
+             return $this->render('cap/newininventory.html.twig', [
+                     'inventory' => $inventory,
+                     'cap' => $cap,
+                     'form' => $form->createView(),
+             ]);
+     }
 }

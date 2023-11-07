@@ -1,6 +1,8 @@
-<!DOCTYPE html>
+{% extends "base.html.twig" %}
 
-<title>Member</title>
+{% block head %}
+    <title>Member</title>
+{% endblock %}
 
 {% block body %}
     <h1>Member</h1>
@@ -20,7 +22,8 @@
 
     <a href="{{ path('app_member_index') }}">back to list</a>
 
-    <a href="{{ path('app_member_edit', {'id': member.id}) }}">edit</a>
-
-    {{ include('member/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_USER') %}
+        <a href="{{ path('app_member_edit', {'id': member.id}) }}">edit</a>
+        {{ include('member/_delete_form.html.twig') }}
+    {% endif %}    
 {% endblock %}

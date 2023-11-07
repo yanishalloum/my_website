@@ -6,6 +6,8 @@ use App\Entity\Cap;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class CapType extends AbstractType
 {
@@ -27,6 +29,8 @@ class CapType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Cap::class,
+            'display_inventory' => true
         ]);
+        $resolver->setAllowedTypes('display_inventory', 'bool');
     }
 }

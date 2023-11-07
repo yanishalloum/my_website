@@ -26,13 +26,15 @@ class PasteController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $paste = new Paste();
-        $form = $this->createForm(PasteType::class, $paste);
+        $form = $this->createForm(PasteType::class, $paste, ['task_is_new' => true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($paste);
             $entityManager->flush();
-
+            
+            $this->addFlash('message', 'bien ajouté');
+            
             // Change content-type according to image's
             $imagefile = $paste->getImageFile();
             if($imagefile) {
