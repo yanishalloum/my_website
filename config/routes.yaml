@@ -23,3 +23,11 @@ app_member_show:
 app_paste_show:
   path: '/paste/{id}'
   controller: App\Controller\PasteController::show
+
+app_registration:
+  path: '/registration'  
+  controller: App\Controller\RegistrationController::index
+
+app_user_registration:
+  path: '/register'
+  controller: App\Controller\RegistrationController::register

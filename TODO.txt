@@ -1,6 +1,14 @@
 ### MyCaps Project
 
 TODO:
+
+- Créer gallery (wardrobe)
+- Faire que gallery soit visible à tout le monde mais inventory uniquement à l'utilisateur concerné
+- Créer tableau de bord "Mon compte" -> accéder inventory, caps et possibilité de les rendre public
+- Créer fonctionnalité pour créer un compte :
+  DONE
+- Quand on se login: redirect à la page d'avant
+
  - Issue when accessing the "Edit Cap" section: 
  "Symfony 5 Error: Object of class Proxies\__CG__\App\Entity\Inventory could not be converted to string"
  Issue resolved by adding __toString method to Inventory.php 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a0d0073a25801f538cc9e551c3e29393",
+    "content-hash": "08153f87c0dd0fcd488c91ce95830c69",
     "packages": [
         {
             "name": "camurphy/bootstrap-menu-bundle",
@@ -3515,16 +3515,16 @@
         },
         {
             "name": "symfony/form",
-            "version": "v6.3.2",
+            "version": "v6.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/form.git",
-                "reference": "afdadf511e08bc6d4752afb869ce084276aca4e2"
+                "reference": "e6743d188f168643cb247f65cbad09ddb1dfcfe5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/form/zipball/afdadf511e08bc6d4752afb869ce084276aca4e2",
-                "reference": "afdadf511e08bc6d4752afb869ce084276aca4e2",
+                "url": "https://api.github.com/repos/symfony/form/zipball/e6743d188f168643cb247f65cbad09ddb1dfcfe5",
+                "reference": "e6743d188f168643cb247f65cbad09ddb1dfcfe5",
                 "shasum": ""
             },
             "require": {
@@ -3592,7 +3592,7 @@
             "description": "Allows to easily create, process and reuse HTML forms",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/form/tree/v6.3.2"
+                "source": "https://github.com/symfony/form/tree/v6.3.7"
             },
             "funding": [
                 {
@@ -3608,7 +3608,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-26T17:39:03+00:00"
+            "time": "2023-10-28T23:11:45+00:00"
         },
         {
             "name": "symfony/framework-bundle",
@@ -5603,16 +5603,16 @@
         },
         {
             "name": "symfony/security-bundle",
-            "version": "v6.3.4",
+            "version": "v6.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-bundle.git",
-                "reference": "31957477b289220a47880ead3727bf5cc059fa08"
+                "reference": "2df460eacceb11b9287cfafddda4d27023dd9001"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/31957477b289220a47880ead3727bf5cc059fa08",
-                "reference": "31957477b289220a47880ead3727bf5cc059fa08",
+                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/2df460eacceb11b9287cfafddda4d27023dd9001",
+                "reference": "2df460eacceb11b9287cfafddda4d27023dd9001",
                 "shasum": ""
             },
             "require": {
@@ -5629,7 +5629,7 @@
                 "symfony/password-hasher": "^5.4|^6.0",
                 "symfony/security-core": "^6.2",
                 "symfony/security-csrf": "^5.4|^6.0",
-                "symfony/security-http": "^6.3"
+                "symfony/security-http": "^6.3.4"
             },
             "conflict": {
                 "symfony/browser-kit": "<5.4",
@@ -5693,7 +5693,7 @@
             "description": "Provides a tight integration of the Security component into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-bundle/tree/v6.3.4"
+                "source": "https://github.com/symfony/security-bundle/tree/v6.3.5"
             },
             "funding": [
                 {
@@ -5709,7 +5709,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-08-25T08:46:23+00:00"
+            "time": "2023-09-25T17:05:55+00:00"
         },
         {
             "name": "symfony/security-core",
@@ -6717,16 +6717,16 @@
         },
         {
             "name": "symfony/validator",
-            "version": "v6.3.4",
+            "version": "v6.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/validator.git",
-                "reference": "0c8435154920b9bbe93bece675234c244cadf73b"
+                "reference": "9cc736663fa5839b9710ac2c303bb0b951014fc1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/validator/zipball/0c8435154920b9bbe93bece675234c244cadf73b",
-                "reference": "0c8435154920b9bbe93bece675234c244cadf73b",
+                "url": "https://api.github.com/repos/symfony/validator/zipball/9cc736663fa5839b9710ac2c303bb0b951014fc1",
+                "reference": "9cc736663fa5839b9710ac2c303bb0b951014fc1",
                 "shasum": ""
             },
             "require": {
@@ -6793,7 +6793,7 @@
             "description": "Provides tools to validate values",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/validator/tree/v6.3.4"
+                "source": "https://github.com/symfony/validator/tree/v6.3.7"
             },
             "funding": [
                 {
@@ -6809,7 +6809,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-08-17T15:49:05+00:00"
+            "time": "2023-10-28T23:11:45+00:00"
         },
         {
             "name": "symfony/var-dumper",

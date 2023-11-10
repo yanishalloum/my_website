@@ -23,10 +23,11 @@ class UserFixtures extends Fixture
 
     private function loadUsers(ObjectManager $manager)
     {
-        foreach ($this->getUserData() as [$email,$plainPassword,$role]) {
+        foreach ($this->getUserData() as [$email,$username, $plainPassword,$role]) {
             $user = new User();
             $password = $this->hasher->hashPassword($user, $plainPassword);
             $user->setEmail($email);
+            $user->setUsername($username);
             $user->setPassword($password);
 
             $roles = array();
@@ -42,10 +43,12 @@ class UserFixtures extends Fixture
                 yield [
                         'chris@localhost',
                         'chris',
+                        'chris',
                         'ROLE_USER'
                 ];
                 yield [
                         'anna@localhost',
+                        'anna',
                         'anna',
                         'ROLE_ADMIN'
                 ];

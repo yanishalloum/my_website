@@ -30,15 +30,26 @@
     </head>
     <body>
         {% block menu %}
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <style>
+                    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+                    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+                </style>
+                <div class="example-wrapper">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         {% if app.user %}
                             {{ render_bootstrap_menu('account') }}
                         {% else %}
                             {{ render_bootstrap_menu('anonymousaccount') }}
+                            <li>    
+                                <a href="{{ path('app_user_registration') }}">Sign up</a>
+                            </li>
+                            
                         {% endif %} {# app.user #}
+                        <li>    
+                                <a href="{{ path('app_home') }}">Return home</a>
+                        </li>
                     </ul>
-            </div>
+                </div>
             <!-- Navigation 
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <div class="container">
