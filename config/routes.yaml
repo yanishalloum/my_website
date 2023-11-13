@@ -24,6 +24,11 @@ app_paste_show:
   path: '/paste/{id}'
   controller: App\Controller\PasteController::show
 
+# Routes pour les pages de consultation des "Wardrobes"
+app_wardrobe_show:
+  path: '/wardrobe/{id}'
+  controller: App\Controller\WardrobeController::show  
+
 app_registration:
   path: '/registration'  
   controller: App\Controller\RegistrationController::index

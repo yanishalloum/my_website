@@ -14,6 +14,8 @@ class AppFixtures extends Fixture
     private const JOHN = 'john';
     private const REDA = 'reda';
     private const SARAH = 'sarah';
+    private const CHRIS = 'chris';
+    private const ANNA = 'anna';
 
     // defines reference names for instances of inventory
     private const JOHN_INVENTORY_1 = 'john-inventory-1';
@@ -51,6 +53,8 @@ class AppFixtures extends Fixture
         yield ["Reda", self::REDA];
         yield ["John", self::JOHN];
         yield ["Sarah", self::SARAH];
+        yield ["Chris", self::CHRIS];
+        yield ["Anna", self::ANNA];
     }
 
     public function load(ObjectManager $manager)

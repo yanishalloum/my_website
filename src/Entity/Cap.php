@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CapRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CapRepository::class)]
@@ -36,6 +38,14 @@ class Cap
 
     #[ORM\ManyToOne(inversedBy: 'caps')]
     private ?Inventory $inventory = null;
+
+    #[ORM\ManyToMany(targetEntity: Wardrobe::class, mappedBy: 'cap')]
+    private Collection $wardrobes;
+
+    public function __construct()
+    {
+        $this->wardrobes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -134,6 +144,33 @@ class Cap
     public function setInventory(?Inventory $inventory): static
     {
         $this->inventory = $inventory;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Wardrobe>
+     */
+    public function getWardrobes(): Collection
+    {
+        return $this->wardrobes;
+    }
+
+    public function addWardrobe(Wardrobe $wardrobe): static
+    {
+        if (!$this->wardrobes->contains($wardrobe)) {
+            $this->wardrobes->add($wardrobe);
+            $wardrobe->addCap($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWardrobe(Wardrobe $wardrobe): static
+    {
+        if ($this->wardrobes->removeElement($wardrobe)) {
+            $wardrobe->removeCap($this);
+        }
 
         return $this;
     }

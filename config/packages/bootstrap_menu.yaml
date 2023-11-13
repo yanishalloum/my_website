@@ -2,9 +2,37 @@ bootstrap_menu:
   menus:
     main:
       items:
-        caps:
-          label: 'Caps list'
-          route: 'app_cap_index'
+        my_space:
+            label: 'My space'
+            items:
+              divider_1:
+                is_divider: true
+                label: 'Users space'
+
+              caps:
+                label: 'My caps'
+                route: 'app_cap_index'
+
+              inventories:
+                label: 'My inventories'
+                route: 'app_inventory_index'
+
+              divider_2:
+                is_divider: true
+                label: 'Admin space'
+                roles: ['ROLE_ADMIN']
+
+              membres:
+                label: 'Member management' 
+                roles: [ 'ROLE_ADMIN' ]  
+                route: 'app_member_index'   
+
+        wardrobe:
+            label: 'Wardrobes'
+            route: 'app_wardrobe_index'
+        member:
+            label: 'Member'
+            route: 'app_member_index'    
 
     anonymousaccount:
       items:
@@ -19,4 +47,7 @@ bootstrap_menu:
          logout:
             label: 'Logout'
             route: 'app_logout'
-            roles: [ 'ROLE_USER' ]              
+            roles: [ 'ROLE_USER' ]  
+
+
+                                

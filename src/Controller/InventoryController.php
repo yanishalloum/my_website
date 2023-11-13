@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Inventory;
+use App\Entity\User;
 use App\Form\InventoryType;
 use App\Repository\InventoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -31,6 +32,9 @@ class InventoryController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user = $this->getUser();
+            $member = $user->getMember();
+            $inventory->setMember($member);
             $entityManager->persist($inventory);
             $entityManager->flush();
 
