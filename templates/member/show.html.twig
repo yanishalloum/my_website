@@ -17,6 +17,17 @@
                 <th>Name</th>
                 <td>{{ member.name }}</td>
             </tr>
+            <th>Inventories</th>
+            <td>
+                <ul>
+                    {% for inventory in member.inventory %}
+                        <a href="{{ path('app_inventory_show', {'id' : inventory.id}) }}">{{ inventory.name }}</a>
+                    {% else %}
+                        <em>No inventories</em>
+                    {% endfor %}
+                </ul>
+                     
+            </td>    
         </tbody>
     </table>
 

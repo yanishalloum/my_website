@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Member;
+use App\Entity\Cap;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
+
 use App\Entity\Wardrobe;
 use App\Form\WardrobeType;
 use App\Repository\WardrobeRepository;
@@ -58,8 +62,9 @@ class WardrobeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $id=$wardrobe->getMember()->getId();
 
-            return $this->redirectToRoute('app_wardrobe_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_wardrobe_index', ['id'=>$id], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('wardrobe/edit.html.twig', [
@@ -70,12 +75,34 @@ class WardrobeController extends AbstractController
 
     #[Route('/{id}', name: 'app_wardrobe_delete', methods: ['POST'])]
     public function delete(Request $request, Wardrobe $wardrobe, EntityManagerInterface $entityManager): Response
-    {
+    {   
+        $id=$wardrobe->getMember()->getId();
         if ($this->isCsrfTokenValid('delete'.$wardrobe->getId(), $request->request->get('_token'))) {
             $entityManager->remove($wardrobe);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_wardrobe_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_wardrobe_index', ['id'=>$id], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{wardrobe_id}/cap/{cap_id}', methods: ['GET'], name: 'app_wardrobe_cap_show')]
+    public function capShow(
+        #[MapEntity(id: 'wardrobe_id')]
+        Wardrobe $wardrobe,
+        #[MapEntity(id: 'cap_id')]
+        Cap $cap): Response
+    {
+        if(! $wardrobe->getCap()->contains($cap)) {
+            throw $this->createNotFoundException("Couldn't find such a cap in this wardrobe!");
+        }
+
+        if(! $wardrobe->isIsVisible()) {
+            throw $this->createAccessDeniedException("You cannot see this wardrobe!");
+        }
+
+        return $this->render('wardrobe/cap/show.html.twig', [
+            'cap' => $cap,
+            'wardrobe' => $wardrobe
+        ]);
     }
 }

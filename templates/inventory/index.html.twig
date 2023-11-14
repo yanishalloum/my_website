@@ -35,16 +35,16 @@
                     
                 {% endif %}  
             {% else %}   
-                    {% if app.user %}
-                        <tr>
-                            <td colspan="4">no records found</td>
-                        </tr>    
-                    {% else %}
-                        <tr>
-                            <td colspan="4">Please login to see your inventories</td>
-                        </tr> 
-                    {% endif %}   
-            {% endfor %}   
+                    <tr>
+                        <td colspan="4">no records found</td>
+                    </tr>
+                           
+            {% endfor %} 
+            {% if not app.user %}  
+                <tr>
+                    <td colspan="4">Please login to see your inventories</td>
+                </tr> 
+            {% endif %}
         
         </tbody>
     </table>

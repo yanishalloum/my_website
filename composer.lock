@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "08153f87c0dd0fcd488c91ce95830c69",
+    "content-hash": "bce9795280d642b6c4dfba296748bb6c",
     "packages": [
         {
             "name": "camurphy/bootstrap-menu-bundle",

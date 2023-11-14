@@ -21,7 +21,7 @@ class Inventory
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'inventory', targetEntity: Cap::class)]
+    #[ORM\OneToMany(mappedBy: 'inventory', targetEntity: Cap::class, orphanRemoval: true)]
     private Collection $caps;
 
     #[ORM\ManyToOne(inversedBy: 'inventory')]

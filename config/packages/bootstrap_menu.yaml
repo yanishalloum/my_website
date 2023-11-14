@@ -30,9 +30,7 @@ bootstrap_menu:
         wardrobe:
             label: 'Wardrobes'
             route: 'app_wardrobe_index'
-        member:
-            label: 'Member'
-            route: 'app_member_index'    
+           
 
     anonymousaccount:
       items:

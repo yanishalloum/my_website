@@ -48,16 +48,16 @@ class UserFixtures extends Fixture
                         'chris@localhost',
                         'chris',
                         'chris',
-                        'ROLE_USER',
+                        'ROLE_ADMIN',
                         'chris'
                         
                 ];
                 yield [
-                        'anna@localhost',
-                        'anna',
-                        'anna',
-                        'ROLE_ADMIN',
-                        'anna'
+                        'sarah@localhost',
+                        'sarah',
+                        'sarah',
+                        'ROLE_USER',
+                        'sarah'
                 ];
                 yield [
                         'reda@localhost',

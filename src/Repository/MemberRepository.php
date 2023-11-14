@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Member;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -19,6 +20,26 @@ class MemberRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Member::class);
+    }
+
+    private function getAvailableMembers()
+    {
+        $user = $this->security->getUser();
+
+        if (!$user) {
+            return [];
+        }
+
+        return $this->memberRepository->findBy(['user' => $user]);
+    }
+
+    public function findMembersForUser(User $user)
+    {
+        return $this->createQueryBuilder('member')
+            ->where('member.user = :user')
+            ->setParameter('user', $user)
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**

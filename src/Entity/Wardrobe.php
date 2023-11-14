@@ -6,6 +6,7 @@ use App\Repository\WardrobeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\QueryBuilder;
 
 #[ORM\Entity(repositoryClass: WardrobeRepository::class)]
 class Wardrobe
@@ -23,6 +24,9 @@ class Wardrobe
 
     #[ORM\Column]
     private ?bool $isVisible = null;
+
+    #[ORM\ManyToOne(inversedBy: 'wardrobes')]
+    private ?Member $member = null;
 
     public function __construct()
     {
@@ -78,6 +82,18 @@ class Wardrobe
     public function setIsVisible(bool $isVisible): static
     {
         $this->isVisible = $isVisible;
+
+        return $this;
+    }
+
+    public function getMember(): ?Member
+    {
+        return $this->member;
+    }
+
+    public function setMember(?Member $member): static
+    {
+        $this->member = $member;
 
         return $this;
     }

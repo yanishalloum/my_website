@@ -17,34 +17,43 @@
                     <th>Condition</th>
                     <th>Brand</th>
                     <th>Year</th>
-                    <th>actions</th>
                     <th>member</th>
+                    <th>actions</th>
                 </tr>
             </thead>
             <tbody>
             {% for cap in caps %}
-                <tr>
-                    <td>{{ cap.id }}</td>
-                    <td>{{ cap.description }}</td>
-                    <td>{{ cap.name }}</td>
-                    <td>{{ cap.color }}</td>
-                    <td>{{ cap.size }}</td>
-                    <td>{{ cap.condition }}</td>
-                    <td>{{ cap.brand }}</td>
-                    <td>{{ cap.year }}</td>
-                    <td>{{ cap.inventory.member.name }}</td>
-                    <td>
-                        <a href="{{ path('app_cap_show', {'id': cap.id}) }}">show</a>
-                        {% if is_granted('ROLE_USER') %}    
-                            <a href="{{ path('app_cap_edit', {'id': cap.id}) }}">edit</a>
-                        {% endif %}
-                    </td>
-                </tr>
+                {% if app.user %}
+                    {% if is_granted('ROLE_ADMIN') or cap.inventory.member.user == app.user %}
+                        <tr>
+                            <td>{{ cap.id }}</td>
+                            <td>{{ cap.description }}</td>
+                            <td>{{ cap.name }}</td>
+                            <td>{{ cap.color }}</td>
+                            <td>{{ cap.size }}</td>
+                            <td>{{ cap.condition }}</td>
+                            <td>{{ cap.brand }}</td>
+                            <td>{{ cap.year }}</td>
+                            <td>{{ cap.inventory.member.name }}</td>
+                            <td>
+                                <a href="{{ path('app_cap_show', {'id': cap.id}) }}">show</a>
+                                {% if is_granted('ROLE_USER') %}    
+                                    <a href="{{ path('app_cap_edit', {'id': cap.id}) }}">edit</a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endif %} 
+                {% endif %}        
             {% else %}
-                <tr>
-                    <td colspan="9">no records found</td>
-                </tr>
+                    <tr>
+                        <td colspan="9">no records found</td>
+                    </tr> 
             {% endfor %}
+                {% if not app.user %}
+                    <tr>
+                        <td colspan="9">please login to see your caps</td>
+                    </tr> 
+                {% endif %}     
             </tbody>
         </table>
 

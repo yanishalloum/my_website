@@ -5,50 +5,45 @@
 {% block body %}
     <h1>Wardrobe index</h1>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ path('app_inventory_index') }}">Inventories</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ path('app_cap_index') }}">Caps</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ path('app_paste_index') }}">Pastes</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{ path('app_member_index') }}">Members</a></li>
-                        <!--
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        -->
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Name</th>
-                <th>IsVisible</th>
                 <th>actions</th>
+                
+                {% if is_granted('ROLE_ADMIN') %}
+                    <th>Is Visible</th>
+                {% endif %}    
+                
             </tr>
         </thead>
         <tbody>
         {% for wardrobe in wardrobes %}
-            <tr>
-                <td>{{ wardrobe.id }}</td>
-                <td>{{ wardrobe.name }}</td>
-                <td>{{ wardrobe.isVisible ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_wardrobe_show', {'id': wardrobe.id}) }}">show</a>
-                    <a href="{{ path('app_wardrobe_edit', {'id': wardrobe.id}) }}">edit</a>
-                </td>
-            </tr>
+            {% if wardrobe.isVisible or (app.user and wardrobe.member is not null and wardrobe.member.user == app.user) %}
+                <tr>
+                    <td>{{ wardrobe.id }}</td>
+                    <td>{{ wardrobe.name }}</td>
+                    <td>
+                        <a href="{{ path('app_wardrobe_show', {'id': wardrobe.id}) }}">show</a>
+                        <a href="{{ path('app_wardrobe_edit', {'id': wardrobe.id}) }}">edit</a>
+                    </td>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <td>Yes</td>
+                    {% endif %}  
+                </tr>
+            {% elseif not wardrobe.isVisible and is_granted('ROLE_ADMIN') %}
+                <tr>
+                    <td>{{ wardrobe.id }}</td>
+                    <td>{{ wardrobe.name }}</td>
+                    <td>
+                        <a href="{{ path('app_wardrobe_show', {'id': wardrobe.id}) }}">show</a>
+                        <a href="{{ path('app_wardrobe_edit', {'id': wardrobe.id}) }}">edit</a>
+                    </td>
+                    <td>No</td>
+                </tr>
+            {% endif %}    
+
         {% else %}
             <tr>
                 <td colspan="4">no records found</td>

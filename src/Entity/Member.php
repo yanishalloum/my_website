@@ -18,15 +18,19 @@ class Member
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\OneToMany(mappedBy: 'member', targetEntity: Inventory::class)]
+    #[ORM\OneToMany(mappedBy: 'member', targetEntity: Inventory::class, orphanRemoval: true)]
     private Collection $inventory;
 
     #[ORM\OneToOne(mappedBy: 'member', cascade: ['persist', 'remove'])]
     private ?User $user = null;
 
+    #[ORM\OneToMany(mappedBy: 'member', targetEntity: Wardrobe::class, orphanRemoval: true)]
+    private Collection $wardrobes;
+
     public function __construct()
     {
         $this->inventory = new ArrayCollection();
+        $this->wardrobes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -96,5 +100,40 @@ class Member
         $this->user = $user;
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Wardrobe>
+     */
+    public function getWardrobes(): Collection
+    {
+        return $this->wardrobes;
+    }
+
+    public function addWardrobe(Wardrobe $wardrobe): static
+    {
+        if (!$this->wardrobes->contains($wardrobe)) {
+            $this->wardrobes->add($wardrobe);
+            $wardrobe->setMember($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWardrobe(Wardrobe $wardrobe): static
+    {
+        if ($this->wardrobes->removeElement($wardrobe)) {
+            // set the owning side to null (unless already changed)
+            if ($wardrobe->getMember() === $this) {
+                $wardrobe->setMember(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name ?? ''; 
     }
 }

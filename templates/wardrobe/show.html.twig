@@ -19,6 +19,20 @@
                 <th>IsVisible</th>
                 <td>{{ wardrobe.isVisible ? 'Yes' : 'No' }}</td>
             </tr>
+            <th>Caps</th>
+            <td>
+                <ul>
+                    {#{% for cap in wardrobe.member.inventory.caps %}#}
+                    {% for inventory in wardrobe.member.inventory %}
+                            {% for cap in inventory.caps %}
+                        <a href="{{ path('app_cap_show', {'id' : cap.id}) }}">{{ cap.name }}</a>
+                    {% else %}
+                        <em>Empty wardrobe</em>
+                    {% endfor %}
+                    {% endfor %}
+                </ul>
+                      
+            </td>  
         </tbody>
     </table>
 
