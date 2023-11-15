@@ -22,6 +22,8 @@ class CapType extends AbstractType
             ->add('brand')
             ->add('year')
             ->add('inventory')
+            ->add('imageName', TextType::class,  ['disabled' => true])
+            ->add('imageFile', VichImageType::class, ['required' => false])
         ;
     }
 

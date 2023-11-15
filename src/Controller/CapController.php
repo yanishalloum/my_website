@@ -32,6 +32,14 @@ class CapController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // Change content-type according to image's
+            $imagefile = $cap->getImageFile();
+            if($imagefile) {
+                    $mimetype = $imagefile->getMimeType();
+                    $cap->setContentType($mimetype);
+            }
+
             $entityManager->persist($cap);
             $entityManager->flush();
 
